@@ -1,0 +1,18 @@
+{
+  "rantool": {
+    "folder-all-branch": "C:/Users/makos/go/src/data",
+    "steps": {
+      "create-funcao": "data/steps/rantool/create-function.sthml"
+    },
+    "templates": {
+      "Funcao": "data/steps/rantool/templates/Funcao.html"
+    }
+  },
+  "test": {
+    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
+    "steps": {
+      "teste": "data/steps/test/teste.sthml"
+    },
+    "templates": {}
+  }
+}

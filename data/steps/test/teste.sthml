@@ -1,0 +1,5 @@
+command teste
+
+define nome as "banana"
+
+say "Olá, " + nome   
