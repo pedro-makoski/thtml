@@ -2,4 +2,4 @@ command teste
 
 define nome as "banana"
 
-say "Olá, " + nome   
+copy 'banana aaa' from '.' as 'banana' on '.'
