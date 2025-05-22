@@ -111,7 +111,7 @@ func getComands(comandsInString string, data map[string]any, needToReplace bool)
 
 		}
 
-		if actual == '+' || (addedConcat && writedInConcat && actual == ' ' && !isOpenAspasDuplas && !isOpenAspasSimples) {
+		if (actual == '+' && !isOpenAspasDuplas && !isOpenAspasSimples) || (addedConcat && writedInConcat && actual == ' ' && !isOpenAspasDuplas && !isOpenAspasSimples) {
 			if addedConcat {
 				addedConcat = false
 				continue

@@ -25,6 +25,7 @@ func Interpret(file string, presetData map[string]any) error {
 		"terminal-exec":        funcoes.TerminalExec,
 		"executar-no-terminal": funcoes.TerminalExec,
 		"terminal":             funcoes.TerminalExec,
+		"create":               funcoes.Create,
 	}
 
 	lines := utils.TransformStringInList(file)

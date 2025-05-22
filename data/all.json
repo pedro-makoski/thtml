@@ -1,6 +1,6 @@
 {
   "rantool": {
-    "folder-all-branch": "C:/Users/makos/go/src/data",
+    "folder-all-branch": "/home/pedro/estudos/programacao/web/rantool",
     "steps": {
       "create-funcao": "data/steps/rantool/create-function.sthml"
     },
