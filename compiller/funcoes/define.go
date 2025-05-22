@@ -14,7 +14,7 @@ func Define(line string, data map[string]any) error {
 			Required: true,
 			Number:   1,
 		},
-	}, line)
+	}, line, false)
 	if err != nil {
 		return err
 	}
@@ -25,7 +25,7 @@ func Define(line string, data map[string]any) error {
 	variableName := comands[0]
 	text := comands[1]
 
-	comand, err := getComands(text, data)
+	comand, err := getComands(text, data, false)
 	if err != nil {
 		return err
 	}

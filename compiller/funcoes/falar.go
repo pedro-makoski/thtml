@@ -5,7 +5,7 @@ import (
 )
 
 func Say(comands string, data map[string]any) error {
-	base, err := getComands(comands, data)
+	base, err := getComands(comands, data, true)
 	if err != nil {
 		return err
 	}

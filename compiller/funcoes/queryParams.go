@@ -2,6 +2,7 @@ package funcoes
 
 import (
 	"errors"
+	"fmt"
 	"thtml/utils"
 )
 
@@ -10,8 +11,11 @@ type ValueOptionsNumber struct {
 	Number   int
 }
 
-func GetQuery(query map[string]ValueOptionsNumber, line string) ([]string, error) {
-	comands := GetSeparedComands(line)
+func GetQuery(query map[string]ValueOptionsNumber, line string, needToReplace bool) ([]string, error) {
+	comands, err := getComands(line, map[string]any{}, needToReplace)
+	if err != nil {
+		return nil, err
+	}
 	keys, values := utils.GetKeysAndValues(query)
 	res := make([]string, len(keys))
 	for index, key := range keys {
@@ -23,7 +27,7 @@ func GetQuery(query map[string]ValueOptionsNumber, line string) ([]string, error
 			}
 
 			if value.Required {
-				return res, errors.New("Está faltando argumentos")
+				return res, errors.New("Está faltando argumento incial")
 			}
 			continue
 		}
@@ -31,7 +35,7 @@ func GetQuery(query map[string]ValueOptionsNumber, line string) ([]string, error
 		indexInComand := utils.GetIndexOfValue(comands, key)
 		exists := !(indexInComand == -1 || indexInComand+1 > len(comands)-1)
 		if !exists && value.Required {
-			return res, errors.New("Está faltando argumentos")
+			return res, fmt.Errorf("Está faltando o argumento após o %v\n", key)
 		}
 
 		if exists {
@@ -43,5 +47,5 @@ func GetQuery(query map[string]ValueOptionsNumber, line string) ([]string, error
 		res[value.Number] = ""
 	}
 
-	return res, nil
+	return ConcatAll(res, map[string]any{}, needToReplace)
 }

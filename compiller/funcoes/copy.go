@@ -23,12 +23,7 @@ func Copy(line string, data map[string]any) error {
 			Required: true,
 			Number:   3,
 		},
-	}, line)
-	if err != nil {
-		return err
-	}
-
-	args, err = ConcatAll(args, data)
+	}, line, false)
 	if err != nil {
 		return err
 	}
@@ -45,5 +40,5 @@ func Copy(line string, data map[string]any) error {
 
 	err = file.InteligentCopy(origem, destino)
 
-	return nil
+	return err
 }

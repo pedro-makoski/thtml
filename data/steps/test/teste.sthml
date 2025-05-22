@@ -2,4 +2,4 @@ command teste
 
 define nome as "banana"
 
-copy 'banana aaa' from '.' as 'banana' on '.'
+copy "banana aaa" from "." as "banana" on "."

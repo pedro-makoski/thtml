@@ -7,15 +7,19 @@ import (
 	"thtml/utils"
 )
 
-func Concat(text string, data map[string]any) (string, error) {
+func Concat(text string, data map[string]any, needToReplace bool) (string, error) {
 	res := ""
 	isOpenAspasDuplas := false
 	isOpenAspasSimples := false
 	cache := ""
 
+	text = strings.TrimSpace(text)
+
 	for index, actual := range text {
-		text = strings.TrimSpace(text)
 		if (actual == ' ' || actual == '+') && !isOpenAspasDuplas && !isOpenAspasSimples {
+			if actual == ' ' {
+				cache += string(actual)
+			}
 			continue
 		}
 
@@ -40,12 +44,17 @@ func Concat(text string, data map[string]any) (string, error) {
 
 		if !isOpenAspasDuplas && !isOpenAspasSimples && (index == len(text)-1 || text[index+1] == '+') {
 			variavel := cache + string(actual)
-			value, ok := data[variavel]
-			if !ok {
-				return "", fmt.Errorf("variável %s não encontrada, tente colocar %s entre aspas assim: '%s'", variavel, variavel, variavel)
+			value := variavel
+			var ok bool
+			if needToReplace {
+				value, ok = data[variavel].(string)
+				if !ok {
+					return "", fmt.Errorf("variável %s não encontrada, tente colocar %s entre aspas assim: '%s'", variavel, variavel, variavel)
+				}
+
 			}
 
-			res += value.(string)
+			res += value
 			continue
 		}
 
@@ -55,11 +64,11 @@ func Concat(text string, data map[string]any) (string, error) {
 	return res, nil
 }
 
-func ConcatAll(text []string, data map[string]any) ([]string, error) {
+func ConcatAll(text []string, data map[string]any, needToReplace bool) ([]string, error) {
 	concat := text
 
 	for index, actual := range text {
-		concated, err := Concat(actual, data)
+		concated, err := Concat(actual, data, needToReplace)
 		if err != nil {
 			return nil, err
 		}
@@ -70,7 +79,7 @@ func ConcatAll(text []string, data map[string]any) ([]string, error) {
 	return concat, nil
 }
 
-func getComands(comandsInString string, data map[string]any) ([]string, error) {
+func getComands(comandsInString string, data map[string]any, needToReplace bool) ([]string, error) {
 	comands := []string{}
 
 	contInList := 0
@@ -123,7 +132,7 @@ func getComands(comandsInString string, data map[string]any) ([]string, error) {
 		wasAdded = false
 	}
 
-	concated, err := ConcatAll(comands, data)
+	concated, err := ConcatAll(comands, data, needToReplace)
 	return concated, err
 }
 

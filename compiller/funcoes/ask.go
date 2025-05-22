@@ -5,7 +5,7 @@ import (
 )
 
 func Ask(comands string, data map[string]any) error {
-	allComands, err := getComands(comands, data)
+	allComands, err := getComands(comands, data, true)
 
 	if err != nil {
 		return err
