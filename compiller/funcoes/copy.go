@@ -23,7 +23,7 @@ func Copy(line string, data map[string]any) error {
 			Required: true,
 			Number:   3,
 		},
-	}, line, false)
+	}, line, false, data)
 	if err != nil {
 		return err
 	}

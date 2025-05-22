@@ -3,3 +3,6 @@ command teste
 define nome as "banana"
 
 copy "banana aaa/banana.txt" from "." on "."
+terminal-exec 'git add .' on "."
+terminal-exec 'git commit -m "Melhorias"' on "."
+terminal-exec 'git push -u origin"' on "."

@@ -10,18 +10,21 @@ func Interpret(file string, presetData map[string]any) error {
 	data := presetData
 
 	var AllMethods = map[string](func(string, map[string]any) error){
-		"ask":        funcoes.Ask,
-		"ask:":       funcoes.Ask,
-		"perguntar":  funcoes.Ask,
-		"perguntar:": funcoes.Ask,
-		"say":        funcoes.Say,
-		"say:":       funcoes.Say,
-		"falar":      funcoes.Say,
-		"falar:":     funcoes.Say,
-		"define":     funcoes.Define,
-		"definir":    funcoes.Define,
-		"copy":       funcoes.Copy,
-		"copiar":     funcoes.Copy,
+		"ask":                  funcoes.Ask,
+		"ask:":                 funcoes.Ask,
+		"perguntar":            funcoes.Ask,
+		"perguntar:":           funcoes.Ask,
+		"say":                  funcoes.Say,
+		"say:":                 funcoes.Say,
+		"falar":                funcoes.Say,
+		"falar:":               funcoes.Say,
+		"define":               funcoes.Define,
+		"definir":              funcoes.Define,
+		"copy":                 funcoes.Copy,
+		"copiar":               funcoes.Copy,
+		"terminal-exec":        funcoes.TerminalExec,
+		"executar-no-terminal": funcoes.TerminalExec,
+		"terminal":             funcoes.TerminalExec,
 	}
 
 	lines := utils.TransformStringInList(file)
