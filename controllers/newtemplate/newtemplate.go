@@ -6,5 +6,5 @@ import (
 )
 
 func StartTemplate(comands []string) error {
-	return configonjsonpart.StartSomething(comands, "./data/steps/%v/templates/%v.html", "templates", templatesfuncs.GetDefineNameId)
+	return configonjsonpart.StartSomething(comands, "%v/templates/%v.html", "templates", templatesfuncs.GetDefineNameId)
 }

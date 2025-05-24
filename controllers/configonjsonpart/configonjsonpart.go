@@ -3,6 +3,7 @@ package configonjsonpart
 import (
 	"errors"
 	"fmt"
+	"path/filepath"
 	"thtml/executable"
 	"thtml/file"
 	"thtml/jsonfuncs"
@@ -15,6 +16,11 @@ func StartSomething(comands []string, pathToFormatNameAndNameWithOutExt string, 
 		return errors.New("está faltando parâmetros")
 	}
 
+	pathJson, err := executable.GetWithJoin("./data/all.json")
+	if err != nil {
+		return err
+	}
+
 	templateFile := comands[0]
 	projectName := comands[1]
 	fullTemplateFile, err := local.GetJoinPathInAbsPathActual(templateFile)
@@ -25,7 +31,12 @@ func StartSomething(comands []string, pathToFormatNameAndNameWithOutExt string, 
 	if err != nil {
 		return err
 	}
-	pathNewToTemplate, err := executable.GetWithJoin(fmt.Sprintf(pathToFormatNameAndNameWithOutExt, projectName, templateName))
+
+	pathOfData, err := jsonfuncs.GetValueOfKey[string](pathJson, projectName, "path-of-data")
+	if err != nil {
+		return err
+	}
+	pathNewToTemplate := filepath.Join(pathOfData, fmt.Sprintf(pathToFormatNameAndNameWithOutExt, projectName, templateName))
 	if err != nil {
 		return err
 	}
@@ -39,9 +50,11 @@ func StartSomething(comands []string, pathToFormatNameAndNameWithOutExt string, 
 		return err
 	}
 
-	pathJson, err := executable.GetWithJoin("./data/all.json")
-	if err != nil {
-		return err
+	if !filepath.IsAbs(newPathToNewTemplate) {
+		newPathToNewTemplate, err = filepath.Abs(newPathToNewTemplate)
+		if err != nil {
+			return err
+		}
 	}
 
 	jsonfuncs.InsertWithFunc(pathJson, func(object map[string]any) map[string]any {
@@ -79,9 +92,5 @@ func GetPathOfJSON(keyName string, projectName string, whereIsAllPaths string) (
 		return "", err
 	}
 
-	path, err = executable.GetWithJoin(path)
-	if err != nil {
-		return "", err
-	}
 	return path, nil
 }

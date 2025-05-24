@@ -11,10 +11,7 @@ import (
 )
 
 func DoRefreshEspecific(funcao func(path string) (string, error), path string) (string, error) {
-	newPath, err := executable.GetWithJoin(path)
-	if err != nil {
-		return "", err
-	}
+	newPath := path
 	value, err := funcao(newPath)
 	if err != nil {
 		return "", err

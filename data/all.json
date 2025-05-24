@@ -14,5 +14,13 @@
       "teste": "data/steps/test/teste.sthml"
     },
     "templates": {}
+  },
+  "testel": {
+    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
+    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
+    "steps": {
+      "banana": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/testel/teste.sthml"
+    },
+    "templates": {}
   }
 }
