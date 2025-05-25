@@ -5,4 +5,4 @@ create branch "rantool-{{title}}" on '{{all-branchs}}/rantool-{{.title}}/src'
 
 create folder '{{all-branchs}}/rantool-{{title}}/dist/funcoes/{{area}}/{{title}}'
 
-create file-on-template '{{.all-branchs}}/rantool-{{.title}}/dist/funcoes/{{area}}/{{title}}/index.html' data-base "{[actualVersion, description, autores, keywords, title, area]}" with-template-name 'Funcao' --change-to-file=true
+create file-on-template '{{.all-branchs}}/rantool-{{.title}}/dist/funcoes/{{area}}/{{title}}/index.html' data-base "{[actualVersion, description, autores, keywords, title, area]}" with-template-name 'Funcao' --change-to-file="banana fdsfjdsklfjsdlk"

@@ -21,6 +21,7 @@ func GetParams(comands []string) (CreateParams, error) {
 	}
 
 	beforeIfParam := ""
+	beforeItemOptional := ""
 	for index, comand := range comands[1:] {
 		if index == 0 && comandCreate.HasStart {
 			res.Params["--"] = comand
@@ -44,6 +45,22 @@ func GetParams(comands []string) (CreateParams, error) {
 			}
 
 			return res, fmt.Errorf("O comando %v não existe na função create %v", prefix, res.Name)
+		}
+
+		primordialRe := regexp.MustCompile("--(.+)")
+		sub = primordialRe.FindStringSubmatch(comand)
+		if len(sub) == 2 {
+			prefix := sub[0]
+			if exists := utils.GetIndexOfValue(comandCreate.Optionals, prefix); exists != -1 {
+				beforeItemOptional = prefix
+			}
+
+			return res, fmt.Errorf("O comando %v não existe para a função create %v", prefix, res.Name)
+		}
+
+		if beforeItemOptional != "" {
+			res.Optionals[beforeItemOptional] = comand
+			beforeIfParam = ""
 		}
 
 		if prefix := utils.GetIndexOfValue(comandCreate.Params, comand); prefix != -1 {
