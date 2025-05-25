@@ -73,5 +73,29 @@ func GetParams(comands []string) (estruturas.CreateParams, error) {
 	}
 
 	res.Configs = comandCreate
-	return res, nil
+	return VerifyObrigatoriosAndDefaults(res)
+}
+
+func VerifyObrigatoriosAndDefaults(comandos estruturas.CreateParams) (estruturas.CreateParams, error) {
+	newComandos := comandos
+	chavesInfomadas, _ := utils.GetKeysAndValues(comandos.Params)
+	for _, obrigatorio := range comandos.Configs.ParametrosObrigatorios {
+		param := comandos.Configs.Params[obrigatorio]
+		if exists := utils.GetIndexOfValue(chavesInfomadas, param); exists == -1 {
+			return estruturas.CreateParams{}, fmt.Errorf("Está faltando o parâmetro: %v", param)
+		}
+	}
+
+	defaultsPoses, defaultsValue := utils.GetKeysAndValues(comandos.Configs.Defaults)
+
+	for idx, posOfDefault := range defaultsPoses {
+		defaultValue := defaultsValue[idx]
+
+		param := comandos.Configs.Params[posOfDefault]
+		if exists := utils.GetIndexOfValue(chavesInfomadas, param); exists == -1 {
+			newComandos.Params[param] = defaultValue
+		}
+	}
+
+	return newComandos, nil
 }

@@ -9,8 +9,10 @@ type CreateParams struct {
 }
 
 type FuncaoDefinedCreate struct {
-	HasStart  bool
-	Params    []string
-	Optionals []string
-	Funcao    func(CreateParams, map[string]any) error
+	HasStart               bool
+	Params                 []string
+	ParametrosObrigatorios []int
+	Optionals              []string
+	Defaults               map[int]any
+	Funcao                 func(CreateParams, map[string]any) error
 }

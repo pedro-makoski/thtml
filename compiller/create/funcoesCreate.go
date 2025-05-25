@@ -8,14 +8,20 @@ import (
 func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 	var CreateFunctions map[string]estruturas.FuncaoDefinedCreate = map[string]estruturas.FuncaoDefinedCreate{
 		"branch": {
-			HasStart: true,
-			Params:   []string{"on"},
-			Funcao:   controllers.CreateBranch,
+			HasStart:               true,
+			Params:                 []string{"on"},
+			ParametrosObrigatorios: []int{0},
+			Funcao:                 controllers.CreateBranch,
 		},
 		"folder": {
 			HasStart: true,
 		},
 		"file": {
+			Params: []string{"with-text"},
+			Defaults: map[int]any{
+				0: "",
+			},
+			Funcao:   controllers.CreateFile,
 			HasStart: true,
 		},
 		"file-on-template": {
