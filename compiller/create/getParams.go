@@ -27,14 +27,14 @@ func GetParams(comandsString string, data map[string]any) (estruturas.CreatePara
 	}
 
 	toSubstituteValue := comandCreate.ValoresSubstituiveis
-	comands, err = querycomand.ConcatAll(comands, data, true, toSubstituteValue)
+	comands, err = querycomand.ConcatAll(comands[1:], data, true, toSubstituteValue)
 	if err != nil {
 		return estruturas.CreateParams{}, err
 	}
 
 	beforeIfParam := ""
 	beforeItemOptional := ""
-	for index, comand := range comands[1:] {
+	for index, comand := range comands {
 		if index == 0 && comandCreate.HasStart {
 			res.Start = comand
 			continue

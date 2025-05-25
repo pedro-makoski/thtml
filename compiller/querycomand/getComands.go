@@ -114,7 +114,10 @@ func GetComandWithoutConcat(comandsInString string, data map[string]any) ([]stri
 
 		if actual == '\'' {
 			isOpenAspasSimples = !isOpenAspasSimples
+		}
 
+		if actual == ' ' && !isOpenAspasDuplas && !isOpenAspasSimples {
+			continue
 		}
 
 		if (actual == '+' && !isOpenAspasDuplas && !isOpenAspasSimples) || (addedConcat && writedInConcat && actual == ' ' && !isOpenAspasDuplas && !isOpenAspasSimples) {
