@@ -1,6 +1,6 @@
 command create-funcao
 
-ask: 'actualVersion' 'description' 'autores' 'keywords' 'title' 'area' 'color-name' 'rgb-color' 'svg'
+ask: 'actualVersion' 'description' 'autores' 'keywords' 'title' 'area' 'color_name' 'hex_color' 'svg'
 // copy 'rantool-main' from '{{all-branchs}}' as 'rantool-{{title}}' on '{{all-branchs}}'
 
 // create branch "rantool-{{title}}" on '{{all-branchs}}/rantool-{{.title}}/dist'
@@ -13,9 +13,9 @@ create file-on-template '{{all-branchs}}/rantool-{{title}}/dist/funcoes/{{area}}
 define imagempath as '{{all-branchs}}/rantool-{{.title}}/dist/server/funcoes/imagens/{{area}}/{{title}}/index.png' 
 define imagemtinypath as '{{all-branchs}}/rantool-{{.title}}/dist/server/funcoes/imagens/{{area}}/{{title}}/index-tiny.png'
 
-create image-file-from-svg .svg color {{.rgb-color}} w:150px h:150px on imagempath format png
-create image-file-from-svg .svg color rgb-color w:42px,h:42px on imagemtinypath format png
+create image-file-from-svg .svg color rgb_color w:150px h:150px on imagempath format png
+create image-file-from-svg .svg color rgb_color w:42px h:42px on imagemtinypath format png
 
-create file '{{all-branchs}}/rantool-{{title}}/data.json' with-text '{"nome": "{{title}}","imagem": "{{imagempath}}","imagem_tiny": "{{.imagemtinypath}}","caminho": "{{.all-branchs}}/rantool-{{.title}}/funcoes/{{.area}}/{{.title}}", "color":"{{.color-name}}", "area":"{{.area}}"}' 
+create file '{{all-branchs}}/rantool-{{title}}/data.json' with-text '{"nome": "{{title}}","imagem": "{{imagempath}}","imagem_tiny": "{{.imagemtinypath}}","caminho": "{{.all-branchs}}/rantool-{{.title}}/funcoes/{{.area}}/{{.title}}", "color":"{{.color_name}}", "area":"{{.area}}"}' 
 
 terminal-exec 'code .' on '{{.all-branchs}/}/rantool-{{.title}}/dist/funcoes/{{area}}/{{title}}/index.html'
