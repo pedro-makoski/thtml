@@ -170,14 +170,13 @@ func removeStyleProperty(styleString, propertyToRemove string) (newStyleString s
 		parts := strings.SplitN(prop, ":", 2)
 		if len(parts) == 2 && strings.TrimSpace(parts[0]) == propertyToRemove {
 			propertyFound = true
-			// Skip this property
 		} else {
 			newProperties = append(newProperties, prop)
 		}
 	}
 
 	if !propertyFound {
-		return styleString, false // Property not found, return original string
+		return styleString, false
 	}
 
 	return strings.Join(newProperties, "; "), true
@@ -189,8 +188,6 @@ func ChangeColor(doc *etree.Document, fillColor, strokeColor string) error {
 		return errors.New("documento XML vazio")
 	}
 
-	// It's good practice to define these colors as constants or ensure they are valid
-	// Forcing lowercase for hex colors can sometimes help, though #ff00ff is standard
 	if fillColor != "" {
 		fillColor = strings.ToLower(fillColor)
 	}
@@ -199,45 +196,37 @@ func ChangeColor(doc *etree.Document, fillColor, strokeColor string) error {
 	}
 
 	for _, el := range root.FindElements(".//*") {
-		// Skip elements that don't typically carry visual styles or define them
 		switch el.Tag {
-		case "defs", "style", "metadata", "script", "title", "desc": // Added more common non-visual tags
+		case "defs", "style", "metadata", "script", "title", "desc":
 			continue
 		}
 
-		// Handle fill color
 		if fillColor != "" {
-			// Always set the direct attribute
-			el.RemoveAttr("fill") // Remove existing direct fill attribute
+			el.RemoveAttr("fill")
 			el.CreateAttr("fill", fillColor)
 
-			// Check and modify the style attribute if it contains 'fill'
 			if styleAttr := el.SelectAttr("style"); styleAttr != nil {
 				newStyle, removed := removeStyleProperty(styleAttr.Value, "fill")
 				if removed {
 					if strings.TrimSpace(newStyle) == "" {
-						el.RemoveAttr("style") // Remove style attribute if it becomes empty
+						el.RemoveAttr("style")
 					} else {
-						styleAttr.Value = newStyle // Update existing style attribute
+						styleAttr.Value = newStyle
 					}
 				}
 			}
 		}
-
-		// Handle stroke color
 		if strokeColor != "" {
-			// Always set the direct attribute
-			el.RemoveAttr("stroke") // Remove existing direct stroke attribute
+			el.RemoveAttr("stroke")
 			el.CreateAttr("stroke", strokeColor)
 
-			// Check and modify the style attribute if it contains 'stroke'
 			if styleAttr := el.SelectAttr("style"); styleAttr != nil {
 				newStyle, removed := removeStyleProperty(styleAttr.Value, "stroke")
 				if removed {
 					if strings.TrimSpace(newStyle) == "" {
-						el.RemoveAttr("style") // Remove style attribute if it becomes empty
+						el.RemoveAttr("style")
 					} else {
-						styleAttr.Value = newStyle // Update existing style attribute
+						styleAttr.Value = newStyle
 					}
 				}
 			}
