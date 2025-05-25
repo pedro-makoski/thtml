@@ -4,6 +4,7 @@ type FuncaoDefinedCreate struct {
 	HasStart  bool
 	Params    []string
 	Optionals []string
+	Funcao    func(CreateParams, map[string]any) error
 }
 
 func GetCreateFunctions() map[string]FuncaoDefinedCreate {
@@ -14,6 +15,11 @@ func GetCreateFunctions() map[string]FuncaoDefinedCreate {
 		},
 		"folder": {
 			HasStart: true,
+			Params:   []string{"on"},
+		},
+		"file": {
+			HasStart: true,
+			Params:   []string{"on"},
 		},
 		"file-on-template": {
 			HasStart:  true,
@@ -23,6 +29,7 @@ func GetCreateFunctions() map[string]FuncaoDefinedCreate {
 	}
 
 	CreateFunctions["pasta"] = CreateFunctions["folder"]
+	CreateFunctions["arquivo"] = CreateFunctions["file"]
 	CreateFunctions["arquivo-com-base-em-template"] = CreateFunctions["file-on-template"]
 
 	return CreateFunctions

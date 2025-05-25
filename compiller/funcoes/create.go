@@ -8,5 +8,5 @@ func Create(line string, data map[string]any) error {
 		return err
 	}
 
-	return create.Create(comands)
+	return create.Create(comands, data)
 }

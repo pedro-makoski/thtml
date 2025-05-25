@@ -1,13 +1,11 @@
 package create
 
-import "fmt"
-
-func Create(comands []string) error {
+func Create(comands []string, data map[string]any) error {
 	newComands, err := GetParams(comands)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(newComands)
-	return nil
+	err = newComands.Configs.Funcao(newComands, data)
+	return err
 }
