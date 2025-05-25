@@ -4,11 +4,12 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"thtml/compiller/create/estruturas"
 	"thtml/utils"
 )
 
-func GetParams(comands []string) (CreateParams, error) {
-	res := CreateParams{}
+func GetParams(comands []string) (estruturas.CreateParams, error) {
+	res := estruturas.CreateParams{}
 	res.Optionals = make(map[string]any)
 	res.Params = make(map[string]any)
 	if len(comands) < 1 {
@@ -24,7 +25,7 @@ func GetParams(comands []string) (CreateParams, error) {
 	beforeItemOptional := ""
 	for index, comand := range comands[1:] {
 		if index == 0 && comandCreate.HasStart {
-			res.Params["--"] = comand
+			res.Start = comand
 			continue
 		}
 
@@ -71,5 +72,6 @@ func GetParams(comands []string) (CreateParams, error) {
 		return res, fmt.Errorf("O parâmetro %v não existe no create %v", comand, res.Name)
 	}
 
+	res.Configs = comandCreate
 	return res, nil
 }

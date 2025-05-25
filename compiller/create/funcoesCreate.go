@@ -1,25 +1,22 @@
 package create
 
-type FuncaoDefinedCreate struct {
-	HasStart  bool
-	Params    []string
-	Optionals []string
-	Funcao    func(CreateParams, map[string]any) error
-}
+import (
+	"thtml/compiller/create/controllers"
+	"thtml/compiller/create/estruturas"
+)
 
-func GetCreateFunctions() map[string]FuncaoDefinedCreate {
-	var CreateFunctions map[string]FuncaoDefinedCreate = map[string]FuncaoDefinedCreate{
+func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
+	var CreateFunctions map[string]estruturas.FuncaoDefinedCreate = map[string]estruturas.FuncaoDefinedCreate{
 		"branch": {
 			HasStart: true,
 			Params:   []string{"on"},
+			Funcao:   controllers.CreateBranch,
 		},
 		"folder": {
 			HasStart: true,
-			Params:   []string{"on"},
 		},
 		"file": {
 			HasStart: true,
-			Params:   []string{"on"},
 		},
 		"file-on-template": {
 			HasStart:  true,

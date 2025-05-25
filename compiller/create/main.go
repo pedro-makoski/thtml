@@ -6,6 +6,8 @@ func Create(comands []string, data map[string]any) error {
 		return err
 	}
 
-	err = newComands.Configs.Funcao(newComands, data)
+	if newComands.Configs.Funcao != nil {
+		err = newComands.Configs.Funcao(newComands, data)
+	}
 	return err
 }
