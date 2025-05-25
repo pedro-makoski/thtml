@@ -1,7 +1,7 @@
 command banana
 
-ask 'nome'
+ask nome
 say "Olá, " + nome
-create folder 'bom-'+nome
+create file 'bom dia.txt' with-text "nome: {{nome}}"
 
 create file-on-template '{{.all-branchs}}/rantool-{{.title}}/dist/funcoes/{{area}}/{{title}}/index.html' data-base "{[actualVersion, description, autores, keywords, title, area]}" with-template-name 'Funcao' --change-to-file=true
