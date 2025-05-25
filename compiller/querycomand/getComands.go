@@ -1,4 +1,4 @@
-package funcoes
+package querycomand
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ func Concat(text string, data map[string]any, needToReplace bool) (string, error
 
 	for index, actual := range text {
 		if (actual == ' ' || actual == '+') && !isOpenAspasDuplas && !isOpenAspasSimples {
-			if actual == ' ' {
+			if actual == ' ' && (isOpenAspasDuplas || isOpenAspasSimples) {
 				cache += string(actual)
 			}
 			continue
@@ -64,11 +64,17 @@ func Concat(text string, data map[string]any, needToReplace bool) (string, error
 	return res, nil
 }
 
-func ConcatAll(text []string, data map[string]any, needToReplace bool) ([]string, error) {
+func ConcatAll(text []string, data map[string]any, needToReplace bool, posesToReplace []string) ([]string, error) {
 	concat := text
 
 	for index, actual := range text {
-		concated, err := Concat(actual, data, needToReplace)
+		isPossible := false
+		if index == 0 {
+			isPossible = utils.Contains(posesToReplace, "--")
+		} else {
+			isPossible = utils.Contains(posesToReplace, text[index-1])
+		}
+		concated, err := Concat(actual, data, needToReplace && (len(posesToReplace) == 0 || isPossible))
 		if err != nil {
 			return nil, err
 		}
@@ -79,7 +85,7 @@ func ConcatAll(text []string, data map[string]any, needToReplace bool) ([]string
 	return concat, nil
 }
 
-func getComands(comandsInString string, data map[string]any, needToReplace bool) ([]string, error) {
+func GetComandWithoutConcat(comandsInString string, data map[string]any) ([]string, error) {
 	comands := []string{}
 
 	contInList := 0
@@ -132,7 +138,16 @@ func getComands(comandsInString string, data map[string]any, needToReplace bool)
 		wasAdded = false
 	}
 
-	concated, err := ConcatAll(comands, data, needToReplace)
+	return comands, nil
+}
+
+func GetComands(comandsInString string, data map[string]any, needToReplace bool, posesToReplace []string) ([]string, error) {
+	comands, err := GetComandWithoutConcat(comandsInString, data)
+	if err != nil {
+		return []string{}, nil
+	}
+
+	concated, err := ConcatAll(comands, data, needToReplace, posesToReplace)
 	return concated, err
 }
 

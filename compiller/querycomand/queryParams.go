@@ -1,4 +1,4 @@
-package funcoes
+package querycomand
 
 import (
 	"errors"
@@ -11,8 +11,8 @@ type ValueOptionsNumber struct {
 	Number   int
 }
 
-func GetQuery(query map[string]ValueOptionsNumber, line string, needToReplace bool, data map[string]any) ([]string, error) {
-	comands, err := getComands(line, map[string]any{}, needToReplace)
+func GetQuery(query map[string]ValueOptionsNumber, line string, needToReplace bool, data map[string]any, posesToReplace []string) ([]string, error) {
+	comands, err := GetComands(line, map[string]any{}, needToReplace, posesToReplace)
 	if err != nil {
 		return nil, err
 	}
@@ -47,5 +47,5 @@ func GetQuery(query map[string]ValueOptionsNumber, line string, needToReplace bo
 		res[value.Number] = ""
 	}
 
-	return ConcatAll(res, data, needToReplace)
+	return ConcatAll(res, data, needToReplace, posesToReplace)
 }

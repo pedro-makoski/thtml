@@ -15,4 +15,5 @@ type FuncaoDefinedCreate struct {
 	Optionals              []string
 	Defaults               map[int]any
 	Funcao                 func(CreateParams, map[string]any) error
+	ValoresSubstituiveis   []string
 }

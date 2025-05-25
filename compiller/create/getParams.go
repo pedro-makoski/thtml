@@ -5,10 +5,15 @@ import (
 	"fmt"
 	"regexp"
 	"thtml/compiller/create/estruturas"
+	"thtml/compiller/querycomand"
 	"thtml/utils"
 )
 
-func GetParams(comands []string) (estruturas.CreateParams, error) {
+func GetParams(comandsString string, data map[string]any) (estruturas.CreateParams, error) {
+	comands, err := querycomand.GetComandWithoutConcat(comandsString, data)
+	if err != nil {
+		return estruturas.CreateParams{}, nil
+	}
 	res := estruturas.CreateParams{}
 	res.Optionals = make(map[string]any)
 	res.Params = make(map[string]any)
@@ -18,7 +23,13 @@ func GetParams(comands []string) (estruturas.CreateParams, error) {
 	res.Name = comands[0]
 	comandCreate, ok := GetCreateFunctions()[res.Name]
 	if !ok {
-		return res, fmt.Errorf("O comando create %v não existe", comandCreate)
+		return res, fmt.Errorf("O comando create %v não existe", res.Name)
+	}
+
+	toSubstituteValue := comandCreate.ValoresSubstituiveis
+	comands, err = querycomand.ConcatAll(comands, data, true, toSubstituteValue)
+	if err != nil {
+		return estruturas.CreateParams{}, err
 	}
 
 	beforeIfParam := ""

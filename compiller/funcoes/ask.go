@@ -1,11 +1,12 @@
 package funcoes
 
 import (
+	"thtml/compiller/querycomand"
 	"thtml/funcoes"
 )
 
 func Ask(comands string, data map[string]any) error {
-	allComands, err := getComands(comands, data, true)
+	allComands, err := querycomand.GetComands(comands, data, false, []string{})
 
 	if err != nil {
 		return err

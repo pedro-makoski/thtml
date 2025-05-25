@@ -2,11 +2,13 @@ package funcoes
 
 import (
 	"errors"
+	"thtml/compiller/querycomand"
 	"thtml/funcoes"
 )
 
 func TerminalExec(line string, data map[string]any) error {
-	comands, err := GetQuery(map[string]ValueOptionsNumber{
+	prefixes := []string{"--", "on"}
+	comands, err := querycomand.GetQuery(map[string]querycomand.ValueOptionsNumber{
 		"--": {
 			Number:   0,
 			Required: true,
@@ -15,14 +17,14 @@ func TerminalExec(line string, data map[string]any) error {
 			Number:   1,
 			Required: true,
 		},
-	}, line, false, data)
+	}, line, true, data, prefixes)
 
 	if err != nil {
 		return err
 	}
 
 	path := comands[1]
-	allComands, err := getComands(comands[0], map[string]any{}, false)
+	allComands, err := querycomand.GetComands(comands[0], map[string]any{}, false, prefixes)
 	if err != nil {
 		return err
 	}

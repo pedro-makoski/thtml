@@ -2,11 +2,12 @@ package funcoes
 
 import (
 	"path/filepath"
+	"thtml/compiller/querycomand"
 	"thtml/file"
 )
 
 func Copy(line string, data map[string]any) error {
-	args, err := GetQuery(map[string]ValueOptionsNumber{
+	args, err := querycomand.GetQuery(map[string]querycomand.ValueOptionsNumber{
 		"--": {
 			Required: true,
 			Number:   0,
@@ -23,7 +24,7 @@ func Copy(line string, data map[string]any) error {
 			Required: true,
 			Number:   3,
 		},
-	}, line, false, data)
+	}, line, true, data, []string{"--", "from", "as", "on"})
 	if err != nil {
 		return err
 	}

@@ -2,10 +2,12 @@ package funcoes
 
 import (
 	"errors"
+	"thtml/compiller/querycomand"
 )
 
 func Define(line string, data map[string]any) error {
-	comands, err := GetQuery(map[string]ValueOptionsNumber{
+	prefixes := []string{"--", "as"}
+	comands, err := querycomand.GetQuery(map[string]querycomand.ValueOptionsNumber{
 		"--": {
 			Required: true,
 			Number:   0,
@@ -14,7 +16,7 @@ func Define(line string, data map[string]any) error {
 			Required: true,
 			Number:   1,
 		},
-	}, line, false, data)
+	}, line, true, data, prefixes)
 	if err != nil {
 		return err
 	}
@@ -25,7 +27,7 @@ func Define(line string, data map[string]any) error {
 	variableName := comands[0]
 	text := comands[1]
 
-	comand, err := getComands(text, data, false)
+	comand, err := querycomand.GetComands(text, data, false, prefixes)
 	if err != nil {
 		return err
 	}

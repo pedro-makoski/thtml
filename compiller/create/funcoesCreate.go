@@ -12,23 +12,27 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 			Params:                 []string{"on"},
 			ParametrosObrigatorios: []int{0},
 			Funcao:                 controllers.CreateBranch,
+			ValoresSubstituiveis:   []string{"--", "on"},
 		},
 		"folder": {
-			HasStart: true,
-			Funcao:   controllers.CreateFolder,
+			HasStart:             true,
+			Funcao:               controllers.CreateFolder,
+			ValoresSubstituiveis: []string{"--"},
 		},
 		"file": {
 			Params: []string{"with-text"},
 			Defaults: map[int]any{
 				0: "",
 			},
-			Funcao:   controllers.CreateFile,
-			HasStart: true,
+			Funcao:               controllers.CreateFile,
+			HasStart:             true,
+			ValoresSubstituiveis: []string{"--", "with-text"},
 		},
 		"file-on-template": {
-			HasStart:  true,
-			Params:    []string{"data-base", "with-template-name"},
-			Optionals: []string{"change-to-file"},
+			HasStart:             true,
+			Params:               []string{"data-base", "with-template-name"},
+			Optionals:            []string{"change-to-file"},
+			ValoresSubstituiveis: []string{"--", "data-base", "with-template-name"},
 		},
 	}
 
