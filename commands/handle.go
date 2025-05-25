@@ -13,7 +13,6 @@ import (
 )
 
 func Help() {
-	fmt.Println("Estão faltando parâmetros")
 	fmt.Println("Insira: init <nome-do-projeto> <local-do-projeto> - para criar um novo projeto")
 	fmt.Println("Insira: new-template <local-do-arquivo> <nome-do-projeto> - para inserir templates no projeto")
 	fmt.Println("Insira: new-steps <local-do-arquivo> <nome-do-projeto> - para inserir um novo passo a passo no projeto")
@@ -24,6 +23,7 @@ func Help() {
 func HandleCommands() error {
 	allParams := os.Args[1:]
 	if len(allParams) <= 0 {
+		fmt.Println("Estão faltando parâmetros")
 		Help()
 		return errors.New("insira mais parâmetros")
 	}
@@ -56,6 +56,9 @@ func HandleCommands() error {
 		if err != nil {
 			return err
 		}
+	default:
+		fmt.Println("Você passou um comando inexistente")
+		Help()
 	}
 
 	return nil

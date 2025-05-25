@@ -1,18 +1,20 @@
 {
+  "baanna": {
+    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
+    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
+    "steps": {},
+    "templates": {}
+  },
   "rantool": {
-    "folder-all-branch": "/home/pedro/estudos/programacao/web/rantool",
-    "steps": {
-      "create-funcao": "data/steps/rantool/create-function.sthml"
-    },
-    "templates": {
-      "Funcao": "data/steps/rantool/templates/Funcao.html"
-    }
+    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
+    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
+    "steps": {},
+    "templates": {}
   },
   "test": {
     "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "steps": {
-      "teste": "data/steps/test/teste.sthml"
-    },
+    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
+    "steps": {},
     "templates": {}
   },
   "testel": {
