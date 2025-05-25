@@ -31,14 +31,14 @@ func GetLinesOfString(path string, linesInOrder []int) ([]string, error) {
 	posInLine := 0
 	for {
 		linha, err := leitor.ReadString('\n')
-		if err == io.EOF || posInLine == len(linesInOrder) {
+		if err == io.EOF || (posInLine == len(linesInOrder) && len(linesInOrder) != 0) {
 			break
 		}
 
 		if err != nil {
 			return lines, err
 		}
-		if i == linesInOrder[posInLine] {
+		if i == linesInOrder[posInLine] || len(linesInOrder) == 0 {
 			linha = strings.TrimSpace(linha)
 			lines[posInLine] = linha
 			posInLine++

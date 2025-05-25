@@ -32,7 +32,8 @@ func Do(comands []string) error {
 		return err
 	}
 	data := map[string]any{
-		"all-branchs": allBranchPath,
+		"all-branchs":  allBranchPath,
+		"project-name": nomeDoProjeto,
 	}
 
 	err = interpretmain.Interpret(content, data)

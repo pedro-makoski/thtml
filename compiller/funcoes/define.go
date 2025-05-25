@@ -6,7 +6,7 @@ import (
 )
 
 func Define(line string, data map[string]any) error {
-	prefixes := []string{"--", "as"}
+	prefixes := []string{"as"}
 	comands, err := querycomand.GetQuery(map[string]querycomand.ValueOptionsNumber{
 		"--": {
 			Required: true,

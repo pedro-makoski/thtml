@@ -30,9 +30,9 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 		},
 		"file-on-template": {
 			HasStart:             true,
-			Params:               []string{"data-base", "with-template-name"},
-			Optionals:            []string{"change-to-file"},
-			ValoresSubstituiveis: []string{"--", "data-base", "with-template-name"},
+			Params:               []string{"with-template-name"},
+			ValoresSubstituiveis: []string{"--", "with-template-name"},
+			Funcao:               controllers.CreateFileOnTemplate,
 		},
 	}
 
