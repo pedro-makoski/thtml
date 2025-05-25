@@ -2,6 +2,7 @@ package startproject
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"thtml/executable"
 	"thtml/file"
@@ -10,16 +11,17 @@ import (
 )
 
 func InitProject(params []string) error {
-	if len(params) < 2 {
+	if len(params) < 3 {
 		return errors.New("Coloque o nome do projeto e o local do projeto(-- para ficar no local do exe)")
 	}
 
 	nome := params[0]
 	pathOfProject := params[1]
+	pathOfData := params[2]
 
 	localRelative := "./"
 	if len(params) >= 2 {
-		localRelative = params[1]
+		localRelative = pathOfProject
 		if localRelative == "." {
 			localRelative = "./"
 		}
@@ -29,28 +31,32 @@ func InitProject(params []string) error {
 		return err
 	}
 
-	if pathOfProject == "--" {
-		pathOfProject, err = executable.GetWithJoin("./data/steps")
+	if pathOfData == "--" {
+		pathOfData, err = executable.GetWithJoin("./data/steps")
 		if err != nil {
 			return err
 		}
-		pathOfProject = filepath.Join(pathOfProject, nome)
+		pathOfData = filepath.Join(pathOfData, nome)
+		fmt.Println(pathOfData)
 	} else {
 		if !filepath.IsAbs(pathOfProject) {
-			pathOfProject, err = filepath.Abs(pathOfProject)
+			pathOfData, err = filepath.Abs(pathOfData)
 			if err != nil {
 				return err
 			}
 		}
-		pathOfProject = filepath.Join(pathOfProject, "./.thtml", nome)
+		pathOfData = filepath.Join(pathOfData, "./.thtml", nome)
 	}
-	file.CreateFolder(pathOfProject)
+	err = file.CreateFolder(pathOfData)
+	if err != nil {
+		return err
+	}
 
 	obj := map[string]any{
 		"steps":             map[string]string{},
 		"templates":         map[string]string{},
 		"folder-all-branch": localAbs,
-		"path-of-data":      pathOfProject,
+		"path-of-data":      pathOfData,
 	}
 
 	path, err := executable.GetWithJoin("./data/all.json")
