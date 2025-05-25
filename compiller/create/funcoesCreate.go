@@ -34,6 +34,19 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 			ValoresSubstituiveis: []string{"--", "with-template-name"},
 			Funcao:               controllers.CreateFileOnTemplate,
 		},
+		"image-file-from-svg": {
+			HasStart:               true,
+			Params:                 []string{"color", "width", "height", "on", "format", "stroke"},
+			ParametrosObrigatorios: []int{3, 4},
+			Defaults: map[int]any{
+				0: "",
+				1: 0,
+				2: 0,
+				5: "",
+			},
+			ValoresSubstituiveis: []string{"color", "width", "height", "on", "format", "stroke"},
+			Funcao:               controllers.CreateImageFileFromSvg,
+		},
 	}
 
 	CreateFunctions["pasta"] = CreateFunctions["folder"]

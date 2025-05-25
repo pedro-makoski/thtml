@@ -23,7 +23,7 @@ func Concat(text string, data map[string]any, needToReplace bool) (string, error
 			continue
 		}
 
-		if actual == '"' {
+		if actual == '"' && !isOpenAspasSimples {
 			if isOpenAspasDuplas {
 				res += funcoes.ReplaceProperties(cache, data)
 				cache = ""
@@ -32,7 +32,7 @@ func Concat(text string, data map[string]any, needToReplace bool) (string, error
 			continue
 		}
 
-		if actual == '\'' {
+		if actual == '\'' && !isOpenAspasDuplas {
 			if isOpenAspasSimples {
 				res += funcoes.ReplaceProperties(cache, data)
 				cache = ""

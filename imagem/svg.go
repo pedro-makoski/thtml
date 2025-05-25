@@ -4,8 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"os"
+	"strconv"
 	"strings"
+	"thtml/file"
 	"thtml/utils"
 
 	"github.com/beevik/etree"
@@ -34,13 +35,6 @@ func (c ConfigsSvgToPngOrJpg) Do() error {
 
 func (c ConfigsSvgToPngOrJpg) TratarErros() error {
 	formats := []string{"jpg", "png"}
-	if c.Width <= 0 || c.Width <= 0 {
-		return errors.New("Tamanho de imagem invalido")
-	}
-
-	if c.Color == "" {
-		return errors.New("Cor invalida")
-	}
 
 	if !utils.Contains(formats, c.OutputFormat) {
 		return errors.New("Formato de saída invalido")
@@ -53,7 +47,7 @@ func (c ConfigsSvgToPngOrJpg) TratarErros() error {
 	return nil
 }
 
-func (c ConfigsSvgToPngOrJpg) PrepareSvg() (string, error) {
+func (c *ConfigsSvgToPngOrJpg) PrepareSvg() (string, error) {
 	err := c.TratarErros()
 	if err != nil {
 		return "", err
@@ -61,7 +55,7 @@ func (c ConfigsSvgToPngOrJpg) PrepareSvg() (string, error) {
 
 	doc := etree.NewDocument()
 	if _, err := doc.ReadFrom(strings.NewReader(c.SvgContent)); err != nil {
-		return "", errors.New("Erro ao analisar o JSON")
+		return "", fmt.Errorf("Erro ao analisar o svg: %v", c.SvgContent)
 	}
 
 	svgElement := doc.FindElement("//svg")
@@ -69,11 +63,15 @@ func (c ConfigsSvgToPngOrJpg) PrepareSvg() (string, error) {
 		return "", errors.New("O svg informado não é um svg")
 	}
 
+	NormalizeViewBox(svgElement)
+
 	ChangeWidthAndHeight(c.Width, c.Height, svgElement)
 	err = ChangeColor(doc, c.Color, c.StrokeColor)
 	if err != nil {
 		return "", err
 	}
+
+	c.OutputPath = file.ChangeExt(c.OutputPath, c.OutputFormat)
 
 	return GetSvgString(doc, svgElement)
 }
@@ -90,57 +88,94 @@ func GetSvgString(doc *etree.Document, svgElement *etree.Element) (string, error
 }
 
 func (c ConfigsSvgToPngOrJpg) RenderSvgElement(content string) error {
-	svgReader := bytes.NewReader([]byte(content))
-
-	ctx, err := canvas.ParseSVG(svgReader)
+	canv, err := canvas.ParseSVG(bytes.NewReader([]byte(content)))
 	if err != nil {
 		return fmt.Errorf("erro ao analisar SVG: %w", err)
 	}
 
-	file, err := os.Create(c.OutputPath)
-	if err != nil {
-		return fmt.Errorf("erro ao criar arquivo de saída: %s", err)
-	}
-	defer file.Close()
+	dpiOption := canvas.DPMM(DPI / 25.4)
 
-	switch c.OutputFormat {
-	case "jpg":
-		jpegWriter := renderers.JPEG(file, canvas.Resolution(DPI))
-		if err := ctx.RenderTo(jpegWriter); err != nil {
-			return fmt.Errorf("erro ao renderizar para JPG: %w", err)
-		}
-	case "png":
-		pngWriter := renderers.PNG(file, canvas.Resolution(DPI))
-		if err := ctx.RenderTo(pngWriter); err != nil {
-			return fmt.Errorf("erro ao renderizar para PNG: %w", err)
-		}
+	if err := renderers.Write(c.OutputPath, canv, dpiOption); err != nil {
+		return fmt.Errorf("erro ao salvar %s: %w", c.OutputFormat, err)
 	}
 
 	return nil
 }
 
-func ChangeWidthAndHeight(width float64, height float64, svgElement *etree.Element) {
-	svgElement.CreateAttr("width", fmt.Sprintf("%v", width))
-	svgElement.CreateAttr("height", fmt.Sprintf("%v", height))
+func NormalizeViewBox(svg *etree.Element) {
+	vb := svg.SelectAttrValue("viewBox", "")
+	parts := strings.Fields(vb)
+	if len(parts) != 4 {
+		return
+	}
+	minX, _ := strconv.ParseFloat(parts[0], 64)
+	minY, _ := strconv.ParseFloat(parts[1], 64)
+	origW, _ := strconv.ParseFloat(parts[2], 64)
+	origH, _ := strconv.ParseFloat(parts[3], 64)
+
+	svg.RemoveAttr("viewBox")
+	svg.CreateAttr("viewBox", fmt.Sprintf("0 0 %v %v", origW, origH))
+
+	g := etree.NewElement("g")
+	g.CreateAttr("transform", fmt.Sprintf("translate(%v %v)", -minX, -minY))
+
+	for _, child := range svg.ChildElements() {
+		svg.RemoveChild(child)
+		g.AddChild(child)
+	}
+	svg.AddChild(g)
 }
 
-func ChangeColor(doc *etree.Document, color string, stroke string) error {
-	foundColorElement := false
+func ChangeWidthAndHeight(width, height float64, svg *etree.Element) {
+	vb := svg.SelectAttrValue("viewBox", "")
+	parts := strings.Fields(vb)
+	if len(parts) == 4 {
+		origW, _ := strconv.ParseFloat(parts[2], 64)
+		origH, _ := strconv.ParseFloat(parts[3], 64)
+		aspect := origW / origH
 
-	for _, el := range doc.FindElements("//*[not(name()='defs') and not(name()='style') and not(name()='metadata')]") { // Evita elementos de definição
-		if el.SelectAttr("fill") != nil {
-			el.CreateAttr("fill", color)
-			foundColorElement = true
-		}
-
-		if el.SelectAttr("stroke") != nil {
-			el.CreateAttr("stroke", stroke)
-			foundColorElement = true
+		switch {
+		case width > 0 && height > 0:
+			height = width / aspect
+		case width > 0:
+			height = width / aspect
+		case height > 0:
+			width = height * aspect
 		}
 	}
 
-	if !foundColorElement {
-		return errors.New("Aviso: Nenhum atributo 'fill' ou 'stroke' encontrado para modificar a cor. O SVG pode não ter sido alterado visualmente na cor.")
+	if width > 0 {
+		svg.RemoveAttr("width")
+		svg.CreateAttr("width", fmt.Sprintf("%.0f", width))
+	}
+	if height > 0 {
+		svg.RemoveAttr("height")
+		svg.CreateAttr("height", fmt.Sprintf("%.0f", height))
+	}
+
+	svg.RemoveAttr("preserveAspectRatio")
+	svg.CreateAttr("preserveAspectRatio", "xMidYMid meet")
+}
+func ChangeColor(doc *etree.Document, fillColor, strokeColor string) error {
+	root := doc.Root()
+	if root == nil {
+		return errors.New("documento XML vazio")
+	}
+	for _, el := range root.FindElements(".//*") {
+		switch el.Tag {
+		case "defs", "style", "metadata":
+			continue
+		}
+
+		if el.SelectAttr("fill") != nil && fillColor != "" {
+			el.RemoveAttr("fill")
+			el.CreateAttr("fill", fillColor)
+		}
+
+		if el.SelectAttr("stroke") != nil && strokeColor != "" {
+			el.RemoveAttr("stroke")
+			el.CreateAttr("stroke", strokeColor)
+		}
 	}
 
 	return nil
