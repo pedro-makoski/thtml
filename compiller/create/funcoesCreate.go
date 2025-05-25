@@ -15,6 +15,7 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 		},
 		"folder": {
 			HasStart: true,
+			Funcao:   controllers.CreateFolder,
 		},
 		"file": {
 			Params: []string{"with-text"},
