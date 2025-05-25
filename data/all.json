@@ -1,27 +1,9 @@
 {
-  "baanna": {
+  "teste": {
     "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
-    "steps": {},
-    "templates": {}
-  },
-  "rantool": {
-    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
-    "steps": {},
-    "templates": {}
-  },
-  "test": {
-    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
-    "steps": {},
-    "templates": {}
-  },
-  "testel": {
-    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml",
+    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/teste",
     "steps": {
-      "banana": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/testel/teste.sthml"
+      "banana": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/teste/banana.sthml"
     },
     "templates": {}
   }

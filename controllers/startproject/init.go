@@ -34,6 +34,7 @@ func InitProject(params []string) error {
 		if err != nil {
 			return err
 		}
+		pathOfProject = filepath.Join(pathOfProject, nome)
 	} else {
 		if !filepath.IsAbs(pathOfProject) {
 			pathOfProject, err = filepath.Abs(pathOfProject)
@@ -41,7 +42,7 @@ func InitProject(params []string) error {
 				return err
 			}
 		}
-		pathOfProject = filepath.Join(pathOfProject, "./.thtml")
+		pathOfProject = filepath.Join(pathOfProject, "./.thtml", nome)
 	}
 	file.CreateFolder(pathOfProject)
 

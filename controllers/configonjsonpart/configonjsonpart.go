@@ -36,11 +36,11 @@ func StartSomething(comands []string, pathToFormatNameAndNameWithOutExt string, 
 	if err != nil {
 		return err
 	}
-	pathNewToTemplate := filepath.Join(pathOfData, fmt.Sprintf(pathToFormatNameAndNameWithOutExt, projectName, templateName))
+	pathNewToTemplate := filepath.Join(pathOfData, fmt.Sprintf(pathToFormatNameAndNameWithOutExt, templateName))
+	err = file.CopyFile(fullTemplateFile, pathNewToTemplate)
 	if err != nil {
 		return err
 	}
-	file.CopyFile(fullTemplateFile, pathNewToTemplate)
 	folder, err := executable.GetFolder()
 	if err != nil {
 		return err
