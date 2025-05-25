@@ -33,6 +33,6 @@ func CreateImageFileFromSvg(params estruturas.CreateParams, data map[string]any)
 		return err
 	}
 
-	fmt.Println("Svg criado com sucesso!")
+	fmt.Println("SVG criado com sucesso!")
 	return nil
 }
