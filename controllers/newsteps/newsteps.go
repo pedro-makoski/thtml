@@ -6,5 +6,5 @@ import (
 )
 
 func NewSteps(comands []string) error {
-	return configonjsonpart.StartSomething(comands, "./%v.sthml", "steps", stepsfuncs.GetComandName)
+	return configonjsonpart.StartSomething(comands, "./%v.sthtml", "steps", stepsfuncs.GetComandName)
 }

@@ -1,6 +1,6 @@
 command banana
 
-ask nome
+ask nome banana
 say "Olá, " + nome
 create file 'bom dia.txt' with-text "nome: {{nome}}"
 
