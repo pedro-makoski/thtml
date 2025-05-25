@@ -15,7 +15,7 @@ func GetParams(comands []string) (CreateParams, error) {
 		return res, errors.New("Está faltando argumentos")
 	}
 	res.Name = comands[0]
-	comandCreate, ok := CreateFunctions[res.Name]
+	comandCreate, ok := GetCreateFunctions()[res.Name]
 	if !ok {
 		return res, fmt.Errorf("O comando create %v não existe", comandCreate)
 	}
