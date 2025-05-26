@@ -30,6 +30,7 @@ func Interpret(file string, presetData map[string]any) error {
 		"ler":                  funcoes.Read,
 		"remove":               funcoes.Remove,
 		"remover":              funcoes.Remove,
+		"define-as-file-name":  funcoes.DefineAsFile,
 		"//":                   func(line string, data map[string]any) error { return nil },
 	}
 
