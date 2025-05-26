@@ -44,7 +44,7 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 				2: 0,
 				5: "",
 			},
-			ValoresSubstituiveis: []string{"color", "width", "height", "on", "format", "stroke"},
+			ValoresSubstituiveis: []string{"--", "color", "width", "height", "on", "format", "stroke"},
 			Funcao:               controllers.CreateImageFileFromSvg,
 		},
 		"json-insert": {
@@ -55,7 +55,7 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 				1: "none",
 				2: "none",
 			},
-			ValoresSubstituiveis: []string{"data", "order", "order-by"},
+			ValoresSubstituiveis: []string{"--", "data", "order", "order-by"},
 			Funcao:               controllers.CreateJsonInsert,
 		},
 	}

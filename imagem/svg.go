@@ -60,7 +60,7 @@ func (c *ConfigsSvgToPngOrJpg) PrepareSvg() (string, error) {
 
 	svgElement := doc.FindElement("//svg")
 	if svgElement == nil {
-		return "", errors.New("O svg informado não é um svg")
+		return "", fmt.Errorf("O svg informado %v não é um svg", c.SvgContent)
 	}
 
 	NormalizeViewBox(svgElement)

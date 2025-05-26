@@ -3,8 +3,10 @@ package controllers
 import (
 	"errors"
 	"fmt"
+	"path/filepath"
 	"strconv"
 	"thtml/compiller/create/estruturas"
+	"thtml/file"
 	"thtml/imagem"
 )
 
@@ -26,6 +28,11 @@ func CreateImageFileFromSvg(params estruturas.CreateParams, data map[string]any)
 		OutputPath:   params.Params["on"].(string),
 		SvgContent:   params.Start,
 		StrokeColor:  params.Params["stroke"].(string),
+	}
+
+	err = file.CreateFolder(filepath.Dir(definicoes.OutputPath))
+	if err != nil {
+		return err
 	}
 
 	err = definicoes.Do()
