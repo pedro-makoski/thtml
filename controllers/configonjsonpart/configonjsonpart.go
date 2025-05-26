@@ -41,15 +41,8 @@ func StartSomething(comands []string, pathToFormatNameAndNameWithOutExt string, 
 	if err != nil {
 		return err
 	}
-	folder, err := executable.GetFolder()
-	if err != nil {
-		return err
-	}
-	newPathToNewTemplate, err := utils.GetRelativePathOfTwoPaths(folder, pathNewToTemplate)
-	if err != nil {
-		return err
-	}
 
+	newPathToNewTemplate := pathNewToTemplate
 	if !filepath.IsAbs(newPathToNewTemplate) {
 		newPathToNewTemplate, err = filepath.Abs(newPathToNewTemplate)
 		if err != nil {
