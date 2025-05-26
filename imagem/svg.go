@@ -99,6 +99,7 @@ func (c ConfigsSvgToPngOrJpg) RenderSvgElement(content string) error {
 		return fmt.Errorf("erro ao salvar %s: %w", c.OutputFormat, err)
 	}
 
+	RedimensionaImagem(c.OutputPath, c.OutputPath, c.Width, c.Height)
 	return nil
 }
 
