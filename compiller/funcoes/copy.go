@@ -31,7 +31,7 @@ func Copy(line string, data map[string]any) error {
 
 	origem := args[0]
 	pastaOrigem := args[1]
-	origem = filepath.Join(origem, pastaOrigem)
+	origem = filepath.Join(pastaOrigem, origem)
 	nomeDoNovoArquivo := args[2]
 	if nomeDoNovoArquivo == "" {
 		nomeDoNovoArquivo = filepath.Base(args[0])
