@@ -6,7 +6,7 @@ import (
 )
 
 func GetValueOfKey[T any](path string, keys ...string) (T, error) {
-	json, err := DessirealizarELerArquivo(path)
+	json, err := DessirealizarELerArquivo[map[string]any](path)
 	var nulo T
 	if err != nil {
 		return nulo, err

@@ -5,7 +5,7 @@ ask 'folder' 'nome-funcao'
 read '{{folder}}/data.json' as data 
 remove '{{folder}}/data.json'
 
-create json-insert '{{folder}}/dist/server/funcoes/funcoes.json' data data order A-Z order-by nome
+create json-insert '{{folder}}/dist/server/funcoes/funcoes.json' data data order 'A-Z' order-by 'nome'
 
 terminal-exec 'git pull origin main' on '{{folder}}/dist'
 terminal-exec 'git add .' on '{{folder}}/dist'

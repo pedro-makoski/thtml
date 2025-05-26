@@ -1,0 +1,218 @@
+[
+  {
+    "area": "Ciencias",
+    "caminho": "/funcoes/ciencias/balanceador-equacao",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/equacao-quimica.png",
+    "imagem_tiny": "/server/funcoes/imagens/equacao-quimica-tiny.png",
+    "nome": "Balanceador de equação química"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/consumo",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/car.png",
+    "imagem_tiny": "/server/funcoes/imagens/car-tiny.png",
+    "nome": "Banana"
+  },
+  {
+    "area": "Texto",
+    "caminho": "/funcoes/textos/bloco-de-notas",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/bloco-de-notas.png",
+    "imagem_tiny": "/server/funcoes/imagens/bloco-de-notas-tiny.png",
+    "nome": "Bloco de notas"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/calculadora",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/calcs.png",
+    "imagem_tiny": "/server/funcoes/imagens/calcs-tiny.png",
+    "nome": "Calculadora"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/calculadora-juros",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/calcs.png",
+    "imagem_tiny": "/server/funcoes/imagens/calcs-tiny.png",
+    "nome": "Calculadora de juros"
+  },
+  {
+    "area": "Sorteio",
+    "caminho": "/funcoes/cara_coroa",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/random.png",
+    "imagem_tiny": "/server/funcoes/imagens/random-tiny.png",
+    "nome": "Cara e Coroa"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/consumo",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/car.png",
+    "imagem_tiny": "/server/funcoes/imagens/car-tiny.png",
+    "nome": "Consumo de combustível km/l"
+  },
+  {
+    "area": "Textos",
+    "caminho": "/funcoes/textos/contador",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/contador.png",
+    "imagem_tiny": "/server/funcoes/imagens/contador-tiny.png",
+    "nome": "Contador de palavras"
+  },
+  {
+    "area": "Tempo",
+    "caminho": "/funcoes/tempo/cronometro",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/cronometro.png",
+    "imagem_tiny": "/server/funcoes/imagens/conometro-tiny.png",
+    "nome": "Cronômetro"
+  },
+  {
+    "area": "Textos",
+    "caminho": "/funcoes/textos/formatador-de-texto",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/contador.png",
+    "imagem_tiny": "/server/funcoes/imagens/contador-tiny.png",
+    "nome": "Formatar de texto"
+  },
+  {
+    "area": "Texto",
+    "caminho": "/funcoes/textos/password-generator",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/password-generator.png",
+    "imagem_tiny": "/server/funcoes/imagens/password-generator-tiny.png",
+    "nome": "Gerador de senha"
+  },
+  {
+    "area": "Imagem",
+    "caminho": "/funcoes/imagens/gerador-qr-code",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/qr-code.png",
+    "imagem_tiny": "/server/funcoes/imagens/qr-code-tiny.png",
+    "nome": "Gerar QR Code"
+  },
+  {
+    "area": "App",
+    "caminho": "/funcoes/app/loja",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/loja.png",
+    "imagem_tiny": "/server/funcoes/imagens/loja-tiny.png",
+    "nome": "Gerenciador de loja"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/imc",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/calcs.png",
+    "imagem_tiny": "/server/funcoes/imagens/calcs-tiny.png",
+    "nome": "IMC"
+  },
+  {
+    "area": "Texto",
+    "caminho": "/funcoes/textos/inverter-texto",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/inverter-texto.png",
+    "imagem_tiny": "/server/funcoes/imagens/inverter-texto-tiny.png",
+    "nome": "Inverter texto"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/numero-aleatorio",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/calcs.png",
+    "imagem_tiny": "/server/funcoes/imagens/calcs-tiny.png",
+    "nome": "Número aleatório"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/numero-extenso",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/number.png",
+    "imagem_tiny": "/server/funcoes/imagens/number-tiny.png",
+    "nome": "Número por extenso"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/numero-romano",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/number.png",
+    "imagem_tiny": "/server/funcoes/imagens/number-tiny.png",
+    "nome": "Número romano"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/numeros-mega-sena",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/random.png",
+    "imagem_tiny": "/server/funcoes/imagens/random-tiny.png",
+    "nome": "Números Mega-Sena"
+  },
+  {
+    "area": "Imagem",
+    "caminho": "/funcoes/imagens/pixel-tool",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/imagem.png",
+    "imagem_tiny": "/server/funcoes/imagens/imagem-tiny.png",
+    "nome": "Pixel Art"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/porcentagem",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/porcentagem.png",
+    "imagem_tiny": "/server/funcoes/imagens/porcentagem-tiny.png",
+    "nome": "Porcentagem"
+  },
+  {
+    "area": "Foco",
+    "caminho": "/funcoes/tempo/pomodoro",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/foco.png",
+    "imagem_tiny": "/server/funcoes/imagens/foco-tiny.png",
+    "nome": "Pômodoro - foco"
+  },
+  {
+    "area": "Imagem",
+    "caminho": "/funcoes/imagens/redimencionar",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/imagem.png",
+    "imagem_tiny": "/server/funcoes/imagens/imagem-tiny.png",
+    "nome": "Redimensionar imagem"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/regra-3",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/x.png",
+    "imagem_tiny": "/server/funcoes/imagens/x-tiny.png",
+    "nome": "Regra de três"
+  },
+  {
+    "area": "Sorteio",
+    "caminho": "/funcoes/sorteio",
+    "color": "--color-004",
+    "imagem": "/server/funcoes/imagens/random.png",
+    "imagem_tiny": "/server/funcoes/imagens/random-tiny.png",
+    "nome": "Sorteio"
+  },
+  {
+    "area": "Ciencias",
+    "caminho": "/funcoes/ciencias/tabela-periodica",
+    "color": "--color-001",
+    "imagem": "/server/funcoes/imagens/table.png",
+    "imagem_tiny": "/server/funcoes/imagens/table-tiny.png",
+    "nome": "Tabela periódica"
+  },
+  {
+    "area": "Calculos",
+    "caminho": "/funcoes/numeros/verificar-cpf",
+    "color": "--color-005",
+    "imagem": "/server/funcoes/imagens/cpf.png",
+    "imagem_tiny": "/server/funcoes/imagens/cpf-tiny.png",
+    "nome": "Verificador de CPF"
+  }
+]

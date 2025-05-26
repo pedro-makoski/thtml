@@ -68,7 +68,7 @@ func GetPathOfJSON(keyName string, projectName string, whereIsAllPaths string) (
 	if err != nil {
 		return "", err
 	}
-	obj, err := jsonfuncs.DessirealizarELerArquivo(pathAct)
+	obj, err := jsonfuncs.DessirealizarELerArquivo[map[string]any](pathAct)
 	if err != nil {
 		return "", err
 	}

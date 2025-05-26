@@ -47,6 +47,17 @@ func GetCreateFunctions() map[string]estruturas.FuncaoDefinedCreate {
 			ValoresSubstituiveis: []string{"color", "width", "height", "on", "format", "stroke"},
 			Funcao:               controllers.CreateImageFileFromSvg,
 		},
+		"json-insert": {
+			HasStart:               true,
+			Params:                 []string{"data", "order", "order-by"},
+			ParametrosObrigatorios: []int{0},
+			Defaults: map[int]any{
+				1: "none",
+				2: "none",
+			},
+			ValoresSubstituiveis: []string{"data", "order", "order-by"},
+			Funcao:               controllers.CreateJsonInsert,
+		},
 	}
 
 	CreateFunctions["pasta"] = CreateFunctions["folder"]

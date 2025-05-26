@@ -18,10 +18,11 @@ func Dessirealizar[T any](text string) (T, error) {
 	return obj, nil
 }
 
-func DessirealizarELerArquivo(path string) (map[string]any, error) {
+func DessirealizarELerArquivo[T any](path string) (T, error) {
 	text, err := file.ReadFile(path)
+	var nulo T
 	if err != nil {
-		return nil, err
+		return nulo, err
 	}
-	return Dessirealizar[map[string]any](text)
+	return Dessirealizar[T](text)
 }

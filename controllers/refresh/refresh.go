@@ -65,7 +65,7 @@ func RefreshAll() error {
 	if err != nil {
 		return err
 	}
-	obj, err := jsonfuncs.DessirealizarELerArquivo(path)
+	obj, err := jsonfuncs.DessirealizarELerArquivo[map[string]any](path)
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,6 @@
 command banana
 
-read './main.go' as 'main'
-remove './banana.txt'
+read './new-json.json' as 'data'
+remove './new-json.json'
 
-say main 
+create json-insert './json-test.json' data data order 'A-Z' order-by 'nome'
