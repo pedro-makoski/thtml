@@ -1,16 +1,3 @@
 {
-  "rantool": {
-    "folder-all-branch": "/home/pedro/estudos/programacao/web/rantool",
-    "path-of-data": "/home/pedro/estudos/programacao/web/rantool/.thtml/rantool",
-    "steps": {},
-    "templates": {}
-  },
-  "teste": {
-    "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
-    "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/teste",
-    "steps": {
-      "banana": "/home/pedro/go/src/github.com/pedro-makoski/thtml/.thtml/teste/banana.sthtml"
-    },
-    "templates": {}
-  }
+  
 }
