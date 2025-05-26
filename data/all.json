@@ -3,7 +3,8 @@
     "folder-all-branch": "/home/pedro/go/src/github.com/pedro-makoski/thtml",
     "path-of-data": "/home/pedro/go/src/github.com/pedro-makoski/thtml/data/steps/rantool",
     "steps": {
-      "create-funcao": "/home/pedro/go/src/github.com/pedro-makoski/thtml/data/steps/rantool/create-funcao.sthtml"
+      "create-funcao": "/home/pedro/go/src/github.com/pedro-makoski/thtml/data/steps/rantool/create-funcao.sthtml",
+      "enviar-funcao": "/home/pedro/go/src/github.com/pedro-makoski/thtml/data/steps/rantool/enviar-funcao.sthtml"
     },
     "templates": {
       "Funcao": "/home/pedro/go/src/github.com/pedro-makoski/thtml/data/steps/rantool/templates/Funcao.html"

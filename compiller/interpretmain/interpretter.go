@@ -28,6 +28,7 @@ func Interpret(file string, presetData map[string]any) error {
 		"create":               funcoes.Create,
 		"read":                 funcoes.Read,
 		"ler":                  funcoes.Read,
+		"remove":               funcoes.Remove,
 		"//":                   func(line string, data map[string]any) error { return nil },
 	}
 

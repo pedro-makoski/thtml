@@ -1,5 +1,6 @@
 command banana
 
 read './main.go' as 'main'
+remove './banana.txt'
 
 say main 
