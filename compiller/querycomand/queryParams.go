@@ -12,7 +12,7 @@ type ValueOptionsNumber struct {
 }
 
 func GetQuery(query map[string]ValueOptionsNumber, line string, needToReplace bool, data map[string]any, posesToReplace []string) ([]string, error) {
-	comands, err := GetComands(line, map[string]any{}, needToReplace, posesToReplace)
+	comands, err := GetComandWithoutConcat(line, map[string]any{})
 	if err != nil {
 		return nil, err
 	}

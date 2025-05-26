@@ -26,6 +26,8 @@ func Interpret(file string, presetData map[string]any) error {
 		"executar-no-terminal": funcoes.TerminalExec,
 		"terminal":             funcoes.TerminalExec,
 		"create":               funcoes.Create,
+		"read":                 funcoes.Read,
+		"ler":                  funcoes.Read,
 		"//":                   func(line string, data map[string]any) error { return nil },
 	}
 
